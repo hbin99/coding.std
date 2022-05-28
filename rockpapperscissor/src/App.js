@@ -61,7 +61,7 @@ function App() {
     }else {return userResult == "win"?"lose":"win"}
   }
 
-  /*return (
+  return (
     <div>
       <div className="main" >
         <Box title = "you" item ={userSelect} result ={result} />
@@ -73,22 +73,7 @@ function App() {
         <button onClick = { () => play("papper")} >보</button>
       </div>
     </div>
-  );*/
-
-  /* https://github.com/legobitna/noona-Rock-Scissors-Paper */
-  return (
-
-    <div className={`box ${result}`}>
-
-      <h1>{props.title}</h1>
-
-      <h2 data-testid="item-name">{props.item && props.item.name}</h2>
-
-      <img className="item-img" src={props.item && props.item.img} />
-
-      <h2>{result}</h2>
-
-    </div>  );
+  );
 }
 
 export default App;
