@@ -26,12 +26,16 @@ function App() {
   let [userSelect, setUserSelect] = useState(null);
   let [computerSelect, setComputerSelect] = useState(null);
   let [result, setResult] = useState("");
+  let [ComputerResult, setComputerResult] = useState("");
+
   const play =(userChoice) =>{
     //함수를 콜백함수 형태로 넣어줘야함 
    setUserSelect(choice[userChoice]);
    let computerChoice = randomChoice(); 
    setComputerSelect(computerChoice);
-   setResult(judgment(choice[userChoice],computerChoice));
+   let userResult = judgment(choice[userChoice],computerChoice);
+   setResult(userResult);
+   setComputerResult(computerJugment(userResult));
   };
 
   const randomChoice=()=>{
@@ -49,11 +53,19 @@ function App() {
     else if(user.name == "Sciccor" ) return computer.name =="Papper"?'win':'lose'
     else if(user.name == "Papper" ) return computer.name =="Rock"?'win':'lose'
   }
-  return (
+  
+  const computerJugment=(userResult)=>{
+    //가위 바위 보
+    if(userResult == "tie"){
+      return "tie";
+    }else {return userResult == "win"?"lose":"win"}
+  }
+
+  /*return (
     <div>
       <div className="main" >
         <Box title = "you" item ={userSelect} result ={result} />
-        <Box title ="computer" item ={computerSelect} result ={result} />
+        <Box title ="computer" item ={computerSelect} result ={ComputerResult} />
       </div>
       <div className="main">
         <button onClick = { () => play("scissors")} >가위</button>
@@ -61,7 +73,22 @@ function App() {
         <button onClick = { () => play("papper")} >보</button>
       </div>
     </div>
-  );
+  );*/
+
+  /* https://github.com/legobitna/noona-Rock-Scissors-Paper */
+  return (
+
+    <div className={`box ${result}`}>
+
+      <h1>{props.title}</h1>
+
+      <h2 data-testid="item-name">{props.item && props.item.name}</h2>
+
+      <img className="item-img" src={props.item && props.item.img} />
+
+      <h2>{result}</h2>
+
+    </div>  );
 }
 
 export default App;

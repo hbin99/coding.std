@@ -9,3 +9,14 @@
   display: flex;
   justify-content: center;
 }
+.box-green{
+  border: 1px solid green;
+  width: 500px;
+}
+.box-red{
+  border: 1px solid red;
+  width: 500px;
+}
+.win {  border: 10px solid green;  color: green; }
+.lose {  border: 10px solid red;  color: red; }
+.tie {  border: 10px solid black;  color: black; }
