@@ -5,6 +5,7 @@ const Box = (props) => {
     <div className="box">
         Box1
         <p>{props.name}</p>
+        <p>{props.num}</p>
     </div>
   )
 }
