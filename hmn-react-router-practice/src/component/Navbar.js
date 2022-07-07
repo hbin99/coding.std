@@ -1,30 +1,82 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-regular-svg-icons'
-const Navbar = () => {
-    const menuList =['여성','Dicided','남성','신생아/유아','sale']
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+const Navbar = ({ authenticate, setAuthenticate }) => {
+  const menuList = [
+    "여성",
+    "Divided",
+    "남성",
+    "신생아/유아",
+    "아동",
+    "H&M HOME",
+    "Sale",
+    "지속가능성",
+  ];
+  let [width, setWidth] = useState(0);
+  let navigate = useNavigate();
+  const onCheckEnter = (event) => {
+    if (event.key === "Enter") {
+      navigate(`?q=${event.target.value}`);
+    }
+  };
   return (
     <div>
-      <div>
-        <div className='login-button'>
-            <FontAwesomeIcon icon={faUser}/>
-            <div>로그인</div>
+      <div className="side-menu" style={{ width: width }}>
+        <button className="closebtn" onClick={() => setWidth(0)}>
+          &times;
+        </button>
+        <div className="side-menu-list" id="menu-list">
+          {menuList.map((menu, index) => (
+            <button key={index}>{menu}</button>
+          ))}
         </div>
-       
       </div>
-      <div className="nav-section">
-        <img width={100} src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F8%2F8e%2FHMC_Logo_Final.svg&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3AHMC_Logo_Final.svg&tbnid=CeUZdyQ0s2WGwM&vet=12ahUKEwiI6aq5wKr4AhVQx5QKHUoMCCEQMygAegUIARC4AQ..i&docid=HdefEz4nCNq1OM&w=1000&h=870&q=hmc%20logo&ved=2ahUKEwiI6aq5wKr4AhVQx5QKHUoMCCEQMygAegUIARC4AQ"/>
-      </div>
-      <div>
-        <div>
-            <ul>
-                <li>여성</li>
-            </ul>
+      <div className="nav-header">
+        <div className="burger-menu hide">
+          <FontAwesomeIcon icon={faBars} onClick={() => setWidth(250)} />
         </div>
-        <div></div>
+        {authenticate ? (
+          <div onClick={() => setAuthenticate(false)}>
+            <FontAwesomeIcon icon={faUser} />
+            <span>로그아웃</span>
+          </div>
+        ) : (
+          <div onClick={() => navigate("/login")}>
+            <FontAwesomeIcon icon={faUser} />
+            <span>로그인</span>
+          </div>
+        )}
+      </div>
+
+      <div className="nav-logo">
+        <Link to="/">
+          <img
+            width={100}
+            src="https://logos-world.net/wp-content/uploads/2020/04/HM-Logo-1999-present.jpg"
+          />
+        </Link>
+      </div>
+      <div class="nav-menu-area">
+        <ul className="menu">
+          {menuList.map((menu, index) => (
+            <li>
+              <a href="#" key={index}>
+                {menu}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div className="search-box">
+          <FontAwesomeIcon icon={faSearch} />
+          <input type="text" placeholder="제품검색" onKeyPress={onCheckEnter} />
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
