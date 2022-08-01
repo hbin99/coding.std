@@ -25,10 +25,10 @@ const ContactForm = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>전화번호r</Form.Label>
+        <Form.Label>전화번호</Form.Label>
         <Form.Control
           type="text"
-          placeholder="전화번호r"
+          placeholder="전화번호"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
